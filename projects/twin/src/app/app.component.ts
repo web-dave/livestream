@@ -1,14 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { ApiService } from './api.service';
-import { API_URL } from './api.token';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'twin-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  url = inject(API_URL);
+  title = 'twin';
   date = inject(ApiService).t.getMilliseconds();
-  title = 'livestream';
 }
