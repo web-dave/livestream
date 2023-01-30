@@ -8,10 +8,18 @@ import { BarComponent } from './bar/bar.component';
 import { BazModule } from './baz/baz.module';
 import { FooComponent } from './foo/foo.component';
 import { HurzModule } from './hurz/hurz.module';
+import { ColorDirective } from './color.directive';
+import { CompositionComponent } from './composition/composition.component';
 
 @NgModule({
-  declarations: [AppComponent, FooComponent],
-  imports: [BrowserModule, AppRoutingModule, BarComponent, HurzModule],
+  declarations: [AppComponent, FooComponent, CompositionComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BarComponent,
+    HurzModule,
+    ColorDirective,
+  ],
   providers: [
     {
       provide: API_URL,

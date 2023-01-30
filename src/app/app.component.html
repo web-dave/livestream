@@ -1,6 +1,27 @@
-<h1>App</h1>
-{{ url }}
+<h1>Directive Composition API</h1>
+<!-- {{ url }}
 <h4>Date: {{ date }}</h4>
 <router-outlet></router-outlet>
 <hr />
-<app-hurz></app-hurz>
+<app-hurz></app-hurz> -->
+<button (click)="show = !show">👁️</button>
+<input type="text" #input (input)="value = input.value" value="blue" />
+{{ value }}
+<div *ngIf="show" id="foo" style="height: 200px; width: 200px">
+  <!--
+  [bgColor]="input.value"
+  --
+>
+  <!-- appColor="darkblue" -->
+  {{ input.value }}
+  <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+  perspiciatis vel dignissimos alias sapiente suscipit nobis minus, inventore
+  exercitationem blanditiis dolor sed unde magni! At maxime suscipit vel hic!
+  Quaerat? -->
+</div>
+<!-- <div *ngTemplateOutlet="myTmpl; context: { $implicit: value }"></div>
+<ng-template [foo]="value" #myTmpl let-foo>
+  <h1>Hallo {{ foo }}</h1>
+</ng-template> -->
+<hr />
+<app-composition [color]="value"></app-composition>
