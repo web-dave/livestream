@@ -1,0 +1,13 @@
+nav {
+  background-color: deepskyblue;
+  border: 1px solid yellow;
+  padding: 15px;
+  a {
+    font-size: xx-large;
+    background-color: deeppink;
+    border: 1px solid #efefef;
+    &.active {
+      border: 1px solid #940af1;
+    }
+  }
+}
