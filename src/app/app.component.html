@@ -361,22 +361,38 @@
 <div class="content" role="main">
   <div class="card-container">
     <h1>!{{ value }}!</h1>
-    <input type="number" #bpm />
+    <input [value]="speed" type="number" #bpm />
   </div>
   <div class="card-container">
     <table>
       <tbody>
         <tr>
-          <td><input #inbut type="checkbox" name="clap_1" /></td>
-          <td><input #inbut type="checkbox" name="clap_2" /></td>
-          <td><input #inbut type="checkbox" name="clap_3" /></td>
-          <td><input #inbut type="checkbox" name="clap_4" /></td>
+          <td [ngClass]="{ active: bar === 0 }">
+            <input (change)="restart()" #inbut type="checkbox" name="clap_0" />
+          </td>
+          <td [ngClass]="{ active: bar === 1 }">
+            <input (change)="restart()" #inbut type="checkbox" name="clap_1" />
+          </td>
+          <td [ngClass]="{ active: bar === 2 }">
+            <input (change)="restart()" #inbut type="checkbox" name="clap_2" />
+          </td>
+          <td [ngClass]="{ active: bar === 3 }">
+            <input (change)="restart()" #inbut type="checkbox" name="clap_3" />
+          </td>
         </tr>
         <tr>
-          <td><input #inbut type="checkbox" name="boom_1" /></td>
-          <td><input #inbut type="checkbox" name="boom_2" /></td>
-          <td><input #inbut type="checkbox" name="boom_3" /></td>
-          <td><input #inbut type="checkbox" name="boom_4" /></td>
+          <td [ngClass]="{ active: bar === 0 }">
+            <input (change)="restart()" #inbut type="checkbox" name="boom_0" />
+          </td>
+          <td [ngClass]="{ active: bar === 1 }">
+            <input (change)="restart()" #inbut type="checkbox" name="boom_1" />
+          </td>
+          <td [ngClass]="{ active: bar === 2 }">
+            <input (change)="restart()" #inbut type="checkbox" name="boom_2" />
+          </td>
+          <td [ngClass]="{ active: bar === 3 }">
+            <input (change)="restart()" #inbut type="checkbox" name="boom_3" />
+          </td>
         </tr>
       </tbody>
     </table>
@@ -388,8 +404,10 @@
     <button (click)="beat.stop()">stop</button>
   </div>
   <!-- <app-beat [bpm]="speed" (takt$)="mach = $event"></app-beat> -->
-  <app-drums [tick]="mach | async"></app-drums>
-  <app-drums [tick]="mach | async" name="clap"></app-drums>
+  <ng-container *ngIf="mach | async as data">
+    <app-drums [tick]="data"></app-drums>
+    <app-drums [tick]="data" name="clap"></app-drums>
+  </ng-container>
 
   <!-- Footer -->
   <footer>
