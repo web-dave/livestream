@@ -360,38 +360,23 @@
 
 <div class="content" role="main">
   <div class="card-container">
-    <h1>!{{ value }}!</h1>
     <input [value]="speed" type="number" #bpm />
   </div>
   <div class="card-container">
+    <hr [id]="mach$ | async" />
     <table>
       <tbody>
-        <tr>
-          <td [ngClass]="{ active: bar === 0 }">
-            <input (change)="restart()" #inbut type="checkbox" name="clap_0" />
+        <tr *ngFor="let d of instruments">
+          <td>
+            <app-drums [tick]="sound" [name]="d"></app-drums>
           </td>
-          <td [ngClass]="{ active: bar === 1 }">
-            <input (change)="restart()" #inbut type="checkbox" name="clap_1" />
-          </td>
-          <td [ngClass]="{ active: bar === 2 }">
-            <input (change)="restart()" #inbut type="checkbox" name="clap_2" />
-          </td>
-          <td [ngClass]="{ active: bar === 3 }">
-            <input (change)="restart()" #inbut type="checkbox" name="clap_3" />
-          </td>
-        </tr>
-        <tr>
-          <td [ngClass]="{ active: bar === 0 }">
-            <input (change)="restart()" #inbut type="checkbox" name="boom_0" />
-          </td>
-          <td [ngClass]="{ active: bar === 1 }">
-            <input (change)="restart()" #inbut type="checkbox" name="boom_1" />
-          </td>
-          <td [ngClass]="{ active: bar === 2 }">
-            <input (change)="restart()" #inbut type="checkbox" name="boom_2" />
-          </td>
-          <td [ngClass]="{ active: bar === 3 }">
-            <input (change)="restart()" #inbut type="checkbox" name="boom_3" />
+          <td *ngFor="let b of bars" [ngClass]="{ active: bar === b }">
+            <input
+              (change)="restart()"
+              #inbut
+              type="checkbox"
+              [name]="d + '_' + b"
+            />
           </td>
         </tr>
       </tbody>
@@ -399,15 +384,10 @@
   </div>
   <div class="card-container">
     <button (click)="setBpm(bpm.value)">BPM</button>
-    <button (click)="send()">send</button>
-    <button (click)="start()">start</button>
+    <!-- <button (click)="send()">send</button> -->
+    <button (click)="beat.start()">start</button>
     <button (click)="beat.stop()">stop</button>
   </div>
-  <!-- <app-beat [bpm]="speed" (takt$)="mach = $event"></app-beat> -->
-  <ng-container *ngIf="mach | async as data">
-    <app-drums [tick]="data"></app-drums>
-    <app-drums [tick]="data" name="clap"></app-drums>
-  </ng-container>
 
   <!-- Footer -->
   <footer>

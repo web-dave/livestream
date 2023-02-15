@@ -1,11 +1,30 @@
 import { Injectable, SimpleChanges } from '@angular/core';
-import { Subject, map, switchMap, interval, takeUntil, tap } from 'rxjs';
+import {
+  Subject,
+  map,
+  switchMap,
+  interval,
+  takeUntil,
+  tap,
+  filter,
+} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BeatService {
-  kill$$ = new Subject();
+  instruments: string[] = [
+    'tink',
+    'clap',
+    'hihat',
+    'openhat',
+    'ride',
+    'snare',
+    'kick',
+    'tom',
+    'boom',
+  ];
+  pause = true;
   bpm = 60;
   bpmSub = new Subject<number>();
   bars: { name: string; active: boolean; bar: number }[] = [];
@@ -14,15 +33,15 @@ export class BeatService {
     .pipe(
       map((data) => (60 / data) * 1000),
       switchMap((b) => interval(b)),
+      filter(() => !this.pause),
       map(() => ++this.i),
       map((v) => {
-        if (v >= 4) {
+        if (v >= 8) {
           this.i = 0;
           return 0;
         }
         return v;
       }),
-      takeUntil(this.kill$$),
       tap((data) => console.log('IIIII', data)),
       map((data) => this.bars[data])
     )
@@ -33,10 +52,14 @@ export class BeatService {
       this.bpmSub.next(this.bpm);
     }
   }
+  start() {
+    this.pause = false;
+  }
   stop() {
-    this.kill$$.next(1);
+    this.pause = true;
   }
   setBars(tones: { name: string; active: boolean; bar: number }[]) {
+    this.i = 0;
     const names: string[] = tones
       .map((t) => t.name)
       .filter((value, index, array) => array.indexOf(value) === index);
@@ -59,5 +82,10 @@ export class BeatService {
 
     const ret = [];
     this.bars = bars;
+  }
+
+  playSound(name: string) {
+    const snd = new Audio(location.href + `assets/${name}.wav`);
+    snd.play();
   }
 }

@@ -17,7 +17,7 @@ export class DrumsComponent implements OnChanges {
     boom: 0,
   };
   beep() {
-    var snd = new Audio(location.href + `assets/${this.name}.wav`);
+    const snd = new Audio(location.href + `assets/${this.name}.wav`);
     snd.play();
   }
 }
