@@ -20,14 +20,20 @@ export class BarComponent implements DoCheck, OnInit {
     console.log('Hallo aus BAR');
   }
   ngOnInit(): void {
-    setInterval(() => {
-      this.i.update((n) => n + 1);
-      // this.i++;
-      console.log(this.i());
-      this.cdr.detectChanges();
-    }, 2000);
+    this.i.update((n) => n + 7);
+    // setInterval(() => {
+    //   this.i.update((n) => n + 1);
+    //   // this.i++;
+    //   console.log(this.i());
+    // this.cdr.detectChanges();
+    // }, 2000);
     fetch('https://swapi.dev/api/people/1')
       .then((data) => data.json())
       .then((data) => this.infos.set(data));
+  }
+
+  los() {
+    this.i.update((n) => n + 1);
+    this.cdr.detectChanges();
   }
 }
