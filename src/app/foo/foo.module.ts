@@ -4,6 +4,7 @@ import { FooComponent } from './foo.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BarComponent } from './bar/bar.component';
 import { BazComponent } from './baz/baz.component';
+import { FooPipe } from './foo.pipe';
 const foo_routes: Routes = [
   {
     path: '',
@@ -20,7 +21,7 @@ const foo_routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [FooComponent, BarComponent, BazComponent],
+  declarations: [FooComponent, BarComponent, BazComponent, FooPipe],
   imports: [CommonModule, RouterModule.forChild(foo_routes)],
 })
 export class FooModule {}
