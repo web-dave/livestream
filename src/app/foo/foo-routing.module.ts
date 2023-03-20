@@ -7,15 +7,20 @@ import { FooComponent } from './foo.component';
 const foo_routes: Routes = [
   {
     path: '',
-    component: FooComponent,
-  },
-  {
-    path: 'bar',
-    component: BarComponent,
-  },
-  {
-    path: 'baz',
-    component: BazComponent,
+    children: [
+      {
+        path: '',
+        component: FooComponent,
+      },
+      {
+        path: 'bar',
+        component: BarComponent,
+      },
+      {
+        path: 'baz',
+        component: BazComponent,
+      },
+    ],
   },
 ];
 
