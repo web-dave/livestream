@@ -21,7 +21,6 @@ const foo_routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [FooComponent, BarComponent, BazComponent, FooPipe],
-  imports: [CommonModule, RouterModule.forChild(foo_routes)],
+    imports: [CommonModule, RouterModule.forChild(foo_routes), FooComponent, BarComponent, BazComponent, FooPipe]
 })
 export class FooModule {}
