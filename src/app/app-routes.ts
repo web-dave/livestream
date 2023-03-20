@@ -4,6 +4,6 @@ export const app_routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./foo/foo-routing.module').then((esm) => esm.foo_routes),
+      import('./foo/foo-routes').then((esm) => esm.foo_routes),
   },
 ];
